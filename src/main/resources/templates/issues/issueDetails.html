@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'issues')}">
+
+<body>
+
+
+<h2>Issue Information</h2>
+
+
+<table class="table table-striped" th:object="${issue}">
+    <tr>
+        <th>Issue Title</th>
+        <td><b th:text="*{issueTitle}"></b></td>
+    </tr>
+    <tr>
+        <th>Issue Type</th>
+        <td th:text="*{issueStyle}"/>
+        </td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td th:text="*{description}"/>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{{id}/edit(id=${issue.id})}" class="btn btn-default">Edit
+    Issue</a>
+<!--<a th:href="@{{id}/issues/new(id=${issue.id})}" class="btn btn-default">Delete-->
+<!--    Issue</a>-->
+
+<br/>
+<br/>
+<br/>
+<h2>Issue Board</h2>
+
+<table class="table table-striped">
+
+    <tr th:each="issueBoard : ${issue.issueBoard}">
+        <td valign="top">
+            <dl class="dl-horizontal">
+                <dt>Count</dt>
+                <dd th:text="${issueBoard.quantity}"/>
+                </dd>
+            </dl>
+    </tr>
+</table>
+
+</body>
+
+</html>
